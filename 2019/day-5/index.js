@@ -22,7 +22,7 @@ function getOperand(param, input, mode) {
   }
 }
 
-function calculateOutput(inputNum, data) {
+function calculateOutput(inputArr, data) {
   let output = 0;
   let stepSize = 4;
   for (let i = 0; i < data.length; i += stepSize) {
@@ -59,7 +59,7 @@ function calculateOutput(inputNum, data) {
       }
       case 3: {
         const inputIdx = data[i + 1];
-        data[inputIdx] = inputNum;
+        data[inputIdx] = inputArr.shift();
         stepSize = 2;
         break;
       }
@@ -130,5 +130,9 @@ function calculateOutput(inputNum, data) {
   return output;
 }
 
-console.log('Advent of Code (Day 5 / Part One): The answer is ' + calculateOutput(1, [...input]));
-console.log('Advent of Code (Day 5 / Part Two): The answer is ' + calculateOutput(5, [...input]));
+console.log('Advent of Code (Day 5 / Part One): The answer is ' + calculateOutput([1], [...input]));
+console.log('Advent of Code (Day 5 / Part Two): The answer is ' + calculateOutput([5], [...input]));
+
+module.exports = {
+  intCode: calculateOutput
+};
