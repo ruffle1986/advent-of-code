@@ -1,4 +1,16 @@
-const day1 = require('./day-1');
+const board = [];
 
-console.log('Day 1/Part One: ', day1.partOneAnswer);
-console.log('Day 1/Part Two: ', day1.partTwoAnswer);
+for (let i = 1; i <= 25; i++) {
+
+  try {
+    const day = require(`./day-${i}`);
+    board.push([
+      `Day ${i}/Part One: `, day.partOneAnswer,
+      '\n',
+      `Day ${i}/Part Two: `, day.partTwoAnswer,
+    ].join(''));
+  } catch {}
+}
+
+console.log('Advent of Code 2021\n\n');
+console.log(board.join('\n\n'));
