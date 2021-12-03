@@ -1,30 +1,30 @@
 const binaryToDecimal = require('../binary-to-decimal');
 
 module.exports = function (input) {
-  const helper = [];
+  const bitCountAt = [];
   for (let i = 0; i < input.length; i++) {
     const binary = input[i];
     for (let j = 0; j < binary.length; j++) {
-      if (helper[j] == null) {
-        helper[j] = [0, 0];
+      if (bitCountAt[j] == null) {
+        bitCountAt[j] = [0, 0];
       }
       const digit = Number(binary[j]);
-      helper[j][digit]++;
+      bitCountAt[j][digit]++;
     }
   }
 
-  let gamma = [];
-  let epsilon = [];
+  let gamma = '';
+  let epsilon = '';
 
-  for (let i = 0; i < helper.length; i++) {
-    if (helper[i][0] > helper[i][1]) {
-      gamma.push(0);
-      epsilon.push(1);
+  for (let i = 0; i < bitCountAt.length; i++) {
+    if (bitCountAt[i][0] > bitCountAt[i][1]) {
+      gamma += '0';
+      epsilon += '1';
     } else {
-      gamma.push(1);
-      epsilon.push(0);
+      gamma += '1';
+      epsilon += '0';
     }
   }
 
-  return binaryToDecimal(gamma.join('')) * binaryToDecimal(epsilon.join(''));
+  return binaryToDecimal(gamma) * binaryToDecimal(epsilon);
 };
