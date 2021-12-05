@@ -1,5 +1,6 @@
 module.exports = function (input) {
   const map = {};
+  let overlapCount = 0;
 
   for (let i = 0; i < input.length; i++) {
     const [start, end] = input[i];
@@ -10,35 +11,27 @@ module.exports = function (input) {
     const vertical = (y1 === y2);
 
     if (horizontal) {
-      let y = y1;
-
-      if (!map[[x1, y]]) map[[x1, y]] = 1;
-      else map[[x1, y]]++;
-
-      while (y !== y2) {
-        if (y1 < y2) y++;
-        if (y1 > y2) y--;
-
+      let minY = Math.min(y1, y2);
+      let maxY = Math.max(y1, y2);
+      for (let y = minY; y <= maxY; y++) {
         if (!map[[x1, y]]) map[[x1, y]] = 1;
-        else map[[x1, y]]++;
+        else {
+          map[[x1, y]]++;
+          if (map[[x1, y]] === 2) overlapCount++;
+        }
       }
-    }
-    
-    if (vertical) {
-      let x = x1;
-
-      if (!map[[x, y1]]) map[[x, y1]] = 1;
-      else map[[x, y1]]++;
-      
-      while (x !== x2) {
-        if (x1 < x2) x++;
-        if (x1 > x2) x--;
-
+    } else if (vertical) {
+      let minX = Math.min(x1, x2);
+      let maxX = Math.max(x1, x2);
+      for (let x = minX; x <= maxX; x++) {
         if (!map[[x, y1]]) map[[x, y1]] = 1;
-        else map[[x, y1]]++;
+        else {
+          map[[x, y1]]++;
+          if (map[[x, y1]] === 2) overlapCount++;
+        }
       }
     }
   }
 
-  return Object.values(map).filter(val => val > 1).length;
+  return overlapCount;
 };
