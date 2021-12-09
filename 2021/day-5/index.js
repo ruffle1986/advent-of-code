@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const inputPuzzle = fs.readFileSync(path.join(__dirname, './input.txt')).toString().split('\r\n')
+const inputPuzzle = fs.readFileSync(path.join(__dirname, './input.txt')).toString().split('\n')
   .filter(Boolean)
   .map((line) => {
     const [start, end] = line.split(' -> ');

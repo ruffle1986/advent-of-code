@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const inputPuzzle = fs.readFileSync(path.join(__dirname, './input.txt')).toString().split('\r\n').map(Number);
+const inputPuzzle = fs.readFileSync(path.join(__dirname, './input.txt')).toString().split('\n').map(Number);
 const partOne = require('./part-one');
 const partTwo = require('./part-two');
 
