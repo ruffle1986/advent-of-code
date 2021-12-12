@@ -4,10 +4,10 @@ function isSmall(c) {
 
 module.exports = function (input) {
   
-  const queue = [['start']];
+  const stack = [['start']];
   const paths = [];
-  while (queue.length > 0) {
-    const path = queue.shift();
+  while (stack.length > 0) {
+    const path = stack.pop();
     const lastNode = path[path.length - 1];
     if (lastNode === 'end') {
       paths.push(path);
@@ -17,10 +17,10 @@ module.exports = function (input) {
         
         if (isSmall(adj[i])) {
           if (!path.includes(adj[i])) {
-            queue.push([...path, adj[i]]);
+            stack.push([...path, adj[i]]);
           } 
         } else {
-          queue.push([...path, adj[i]]);
+          stack.push([...path, adj[i]]);
         }
       }
     }

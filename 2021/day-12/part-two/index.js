@@ -3,11 +3,11 @@ function isSmall(c) {
 }
 
 module.exports = function (input) { 
-  const queue = [[['start'], { start: 1 }, false]];
+  const stack = [[['start'], { start: 1 }, false]];
   const paths = [];
 
-  while (queue.length > 0) {
-    const [path, visited, addedTwice] = queue.shift();
+  while (stack.length > 0) {
+    const [path, visited, addedTwice] = stack.pop();
     const lastNode = path[path.length - 1];
     
     if (lastNode === 'end') {
@@ -28,16 +28,16 @@ module.exports = function (input) {
               [adj[i]]: true
             };
 
-            queue.push([[...path, adj[i]], newVisited, addedTwice]);
+            stack.push([[...path, adj[i]], newVisited, addedTwice]);
           
           } else {
             
             if (!addedTwice && !['start', 'end'].includes(adj[i])) {
-              queue.push([[...path, adj[i]], visited, true]);
+              stack.push([[...path, adj[i]], visited, true]);
             }
           }
         } else {
-          queue.push([[...path, adj[i]], visited, addedTwice]);
+          stack.push([[...path, adj[i]], visited, addedTwice]);
         }
       }
     }
