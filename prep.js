@@ -38,24 +38,27 @@ if (!fs.existsSync('./index.js')) {
   if (!year) {
     throw new Error('please provide a year to create the main file');
   }
-  const content = `
-const board = [];
+  const content = `console.log('Advent of Code ${year}\\n\\n');
 
 for (let i = 1; i <= 25; i++) {
 
-  try {
-    const day = require('./day-' + i);
-    board.push([
-      'Day ' + i + '/Part One: ', day.partOneAnswer,
-      '\\n',
-      'Day ' + i + '/Part Two: ', day.partTwoAnswer,
-    ].join(''));
-  } catch {}
+  const day = require('./day-' + i);
+  const board = [
+    
+    'Day ' + i + '/Part One: ', day.partOneAnswer,
+    '\\n',
+    'Day ' + i + '/Part Two: ', day.partTwoAnswer,
+  ];
+
+  console.log(board.join('') + '\\n\\n');
 }
 
-console.log('Advent of Code ${year}\\n\\n');
-console.log(board.join('\\n\\n'));`;
+console.log('Merry Christmas! :)');`;
+
   fs.writeFileSync('./index.js', content);
 }
+
+
+
 
 console.log('Happy Coding!');
